@@ -1,8 +1,6 @@
-#http-java-basic
+# http-java-basic
 Project of simple server using default java stuff - no spring
 
-##run
-Server use `jetty-maven-plugin` and `maven-wraper`  
-```shell script
-./mvnw jetty:run
-```
+## usage
+`GET /api/hello` -> Hello world!  
+`GET /api/hello?user=foo` -> Hello foo!

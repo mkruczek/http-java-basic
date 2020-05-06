@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>pl.kruczek</groupId>
     <artifactId>http-java-basic</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
@@ -35,12 +35,13 @@
     </build>
 
     <dependencies>
+        <!-- http -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-plus</artifactId>
             <version>9.4.28.v20200408</version>
         </dependency>
-        <!--logging-->
+        <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
