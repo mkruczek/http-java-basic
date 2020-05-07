@@ -12,13 +12,27 @@ import java.io.IOException;
 @WebServlet(name = "hello", urlPatterns = "/api/hello")
 public class HelloServlet extends HttpServlet {
 
+    private final String PARAM_USER = "user";
+    private final String PARAM_ID = "id";
     private final Logger LOG = LoggerFactory.getLogger(HelloServlet.class);
+
+    HelloService service;
+
+    public HelloServlet() {
+        this(new HelloService());
+    }
+
+    HelloServlet(HelloService service) {
+        this.service = service;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String user = req.getParameter("user") != null ? req.getParameter("user") : "world";
-        LOG.info("get request: {}", req);
-        resp.getWriter().write("hello " + user + "!");
+        LOG.info("get request: {}", req.getParameterMap());
+        resp.getWriter().write(service.getGreeting(
+                req.getParameter(PARAM_USER),
+                req.getParameter(PARAM_ID)
+        ));
     }
 
 }

@@ -26,11 +26,11 @@
                     <target>12</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.28.v20200408</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.eclipse.jetty</groupId>-->
+<!--                <artifactId>jetty-maven-plugin</artifactId>-->
+<!--                <version>9.4.28.v20200408</version>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
@@ -39,6 +39,11 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-plus</artifactId>
+            <version>9.4.28.v20200408</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-annotations</artifactId>
             <version>9.4.28.v20200408</version>
         </dependency>
         <!-- logging -->
@@ -51,6 +56,25 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.30</version>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- utils -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
         </dependency>
     </dependencies>
 
