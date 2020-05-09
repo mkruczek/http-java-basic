@@ -1,33 +1,35 @@
-package pl.kruczek.httpjavabasic;
+package pl.kruczek.httpjavabasic.hello;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.kruczek.httpjavabasic.lang.LangDto;
+import pl.kruczek.httpjavabasic.lang.LangService;
 
 import java.util.UUID;
 
 class HelloService {
 
     private final Logger LOG = LoggerFactory.getLogger(HelloService.class);
-    static final Lang DEFAULT_LANG = new Lang(UUID.randomUUID(), "Hello", "en_US");
 
-    private LangRepository langRepository;
+    private LangService langService;
 
     HelloService() {
-        this(new LangRepository());
+        this(new LangService());
     }
 
-    HelloService(LangRepository langRepository) {
-        this.langRepository = langRepository;
+    HelloService(LangService langService) {
+        this.langService = langService;
     }
 
     String getGreeting(String user, String langId) {
         UUID id = getUUID(langId);
         String name = StringUtils.isBlank(user) ? "world" : user;
-        Lang welcomeMsg = langRepository.findById(id).orElse(DEFAULT_LANG);
+        LangDto welcomeMsg = langService.findById(id);
         return welcomeMsg.getMsg() + " " + name + "!";
     }
 
+    //todo if value.isBlank throw exception
     private UUID getUUID(String value) {
         if (value != null) {
             try {
@@ -37,6 +39,6 @@ class HelloService {
                 LOG.warn("Return default langId for input: {}.", value);
             }
         }
-        return DEFAULT_LANG.getId();
+        return UUID.randomUUID();
     }
 }

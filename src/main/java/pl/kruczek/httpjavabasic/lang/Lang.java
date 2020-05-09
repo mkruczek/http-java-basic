@@ -1,4 +1,4 @@
-package pl.kruczek.httpjavabasic;
+package pl.kruczek.httpjavabasic.lang;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,24 +10,16 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name = "lang")
 @Getter
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@Table(name = "lang")
 class Lang {
 
     @Id
     private UUID id;
     private String msg;
     private String code;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public String getCode() {
-        return code;
-    }
 
     //for Hibernate
     public Lang() {

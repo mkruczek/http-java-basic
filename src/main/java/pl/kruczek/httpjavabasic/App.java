@@ -6,7 +6,14 @@ import org.eclipse.jetty.plus.webapp.PlusConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.component.AbstractLifeCycle;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.eclipse.jetty.webapp.*;
+import org.eclipse.jetty.webapp.Configuration;
+import org.eclipse.jetty.webapp.FragmentConfiguration;
+import org.eclipse.jetty.webapp.JettyWebXmlConfiguration;
+import org.eclipse.jetty.webapp.MetaInfConfiguration;
+import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.webapp.WebInfConfiguration;
+import org.eclipse.jetty.webapp.WebXmlConfiguration;
+import pl.kruczek.httpjavabasic.config.DBFacade;
 
 public class App {
 
@@ -29,10 +36,10 @@ public class App {
         Server server = new Server(8888);
         server.setHandler(webContext);
 
-        server.addLifeCycleListener(new AbstractLifeCycle.AbstractLifeCycleListener(){
+        server.addLifeCycleListener(new AbstractLifeCycle.AbstractLifeCycleListener() {
             @Override
             public void lifeCycleStopped(LifeCycle event) {
-                DBConnection.close();
+                DBFacade.close();
             }
         });
         server.start();

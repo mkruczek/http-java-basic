@@ -1,4 +1,4 @@
-package pl.kruczek.httpjavabasic;
+package pl.kruczek.httpjavabasic.hello;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

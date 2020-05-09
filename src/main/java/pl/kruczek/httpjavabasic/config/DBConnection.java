@@ -1,4 +1,4 @@
-package pl.kruczek.httpjavabasic;
+package pl.kruczek.httpjavabasic.config;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -9,8 +9,17 @@ class DBConnection {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
+    DBConnection() {
+    }
+
     static SessionFactory getSessionFactory(){
         return sessionFactory;
+    }
+
+    static void close() {
+        if ( sessionFactory != null ) {
+            sessionFactory.close();
+        }
     }
 
     private static SessionFactory buildSessionFactory() {
@@ -27,14 +36,5 @@ class DBConnection {
             StandardServiceRegistryBuilder.destroy( registry );
             throw ex;
         }
-    }
-
-    static void close() {
-        if ( sessionFactory != null ) {
-            sessionFactory.close();
-        }
-    }
-
-    private DBConnection() {
     }
 }

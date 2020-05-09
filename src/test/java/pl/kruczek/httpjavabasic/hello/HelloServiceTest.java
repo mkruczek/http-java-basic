@@ -1,40 +1,41 @@
-package pl.kruczek.httpjavabasic;
+package pl.kruczek.httpjavabasic.hello;
 
 import org.junit.Test;
+import pl.kruczek.httpjavabasic.lang.LangDto;
+import pl.kruczek.httpjavabasic.lang.LangService;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class HelloServiceTest {
 
-
     @Test
     public void test_userNull_getGreeting_returnDefaultValue() {
         //given
-        Lang lang = new Lang(UUID.randomUUID(), "Siemanko", "pl_PL");
-        LangRepository mock = createMockLangRepository(lang);
+        LangDto LangDto = new LangDto(UUID.randomUUID(), "Siemanko", "pl_PL");
+        LangService mock = createMockLangDtoRepository(LangDto);
         HelloService sut = new HelloService(mock);
         String user = null;
 
         //when
-        String greeting = sut.getGreeting(user, lang.getId().toString());
+        String greeting = sut.getGreeting(user, LangDto.getId().toString());
 
         //then
         assertEquals("Siemanko world!", greeting);
     }
 
-
     @Test
     public void test_userMkruczek_getGreeting_returnMkruczek() {
         //given
-        Lang lang = new Lang(UUID.randomUUID(), "Hello", "en_US");
-        LangRepository mock = createMockLangRepository(lang);
+        LangDto langDto = new LangDto(UUID.randomUUID(), "Hello", "en_US");
+        LangService mock = createMockLangDtoRepository(langDto);
         HelloService sut = new HelloService(mock);
         String user = "mkruczek";
         //when
-        String greeting = sut.getGreeting(user, lang.getId().toString());
+        String greeting = sut.getGreeting(user, langDto.getId().toString());
 
         //then
         assertEquals("Hello " + user + "!", greeting);
@@ -75,7 +76,7 @@ public class HelloServiceTest {
     }
 
     @Test
-    public void test_idString_userMkruczek_getGreeting_returnDefaultLang() {
+    public void test_idString_userMkruczek_getGreeting_returnDefaultLangDto() {
         //given
         HelloService sut = new HelloService();
         String user = "mkruczek";
@@ -87,29 +88,16 @@ public class HelloServiceTest {
         assertEquals("Hello " + user + "!", greeting);
     }
 
-    @Test
-    public void test_idEmptyLang_getGreeting_returnDefaultLang() {
-        //given
-        LangRepository mock = new LangRepository() {
+    private LangService createMockLangDtoRepository(LangDto langDto) {
+        return new LangService() {
             @Override
-            Optional<Lang> findById(UUID id) {
-                return Optional.empty();
+            public List<pl.kruczek.httpjavabasic.lang.LangDto> getAll() {
+                return Arrays.asList(langDto);
             }
-        };
-        HelloService sut = new HelloService(mock);
 
-        //when
-        String greeting = sut.getGreeting(null, UUID.randomUUID().toString());
-
-        //then
-        assertEquals("Hello world!", greeting);
-    }
-
-    private LangRepository createMockLangRepository(Lang lang) {
-        return new LangRepository() {
             @Override
-            Optional<Lang> findById(UUID id) {
-                return Optional.of(lang);
+            public LangDto findById(UUID id) {
+                return langDto;
             }
         };
     }
