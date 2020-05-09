@@ -26,11 +26,15 @@
                     <target>12</target>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.eclipse.jetty</groupId>-->
-<!--                <artifactId>jetty-maven-plugin</artifactId>-->
-<!--                <version>9.4.28.v20200408</version>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.4.1</version>
+                <configuration>
+                    <url>jdbc:h2:file:./db</url>
+                    <user>sa</user>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -56,6 +60,17 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.30</version>
+        </dependency>
+        <!-- db -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.15.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
         </dependency>
         <!-- test -->
         <dependency>

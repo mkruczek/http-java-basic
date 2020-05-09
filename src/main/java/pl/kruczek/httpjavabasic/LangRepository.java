@@ -1,19 +1,20 @@
 package pl.kruczek.httpjavabasic;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.util.Optional;
 import java.util.UUID;
 
 class LangRepository {
 
-    private final Map<UUID, Lang> languages;
-
-    LangRepository() {
-        this.languages = new HashMap<>();
-    }
-
     Optional<Lang> findById(UUID id) {
-        return Optional.ofNullable(languages.get(id));
+        Session session = DBConnection.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Lang result = session.get(Lang.class, id);
+        transaction.commit();
+        session.close();
+
+        return Optional.ofNullable(result);
     }
 }
