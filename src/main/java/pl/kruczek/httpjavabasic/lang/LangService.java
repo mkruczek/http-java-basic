@@ -29,6 +29,9 @@ public class LangService {
     }
 
     public LangDto findById(UUID id) {
+        if (id == null) {
+            return DEFAULT_LANG;
+        }
         Optional<Lang> byId = langRepository.findById(id);
         return byId.isPresent() ? byId.map(LangDto::fromLang).get() : DEFAULT_LANG;
     }

@@ -36,6 +36,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="pl.kruczek.httpjavabasic.lang.Lang"/>
+        <mapping class="pl.kruczek.httpjavabasic.todo.Todo"/>
 
     </session-factory>
 

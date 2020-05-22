@@ -22,23 +22,9 @@ class HelloService {
         this.langService = langService;
     }
 
-    String getGreeting(String user, String langId) {
-        UUID id = getUUID(langId);
+    String getGreeting(String user, UUID id) {
         String name = StringUtils.isBlank(user) ? "world" : user;
         LangDto welcomeMsg = langService.findById(id);
         return welcomeMsg.getMsg() + " " + name + "!";
-    }
-
-    //todo if value.isBlank throw exception
-    private UUID getUUID(String value) {
-        if (value != null) {
-            try {
-                return UUID.fromString(value);
-            } catch (IllegalArgumentException ex) {
-                //do nothing
-                LOG.warn("Return default langId for input: {}.", value);
-            }
-        }
-        return UUID.randomUUID();
     }
 }

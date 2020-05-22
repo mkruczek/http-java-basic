@@ -21,7 +21,7 @@ public class HelloServiceTest {
         String user = null;
 
         //when
-        String greeting = sut.getGreeting(user, LangDto.getId().toString());
+        String greeting = sut.getGreeting(user, LangDto.getId());
 
         //then
         assertEquals("Siemanko world!", greeting);
@@ -35,7 +35,7 @@ public class HelloServiceTest {
         HelloService sut = new HelloService(mock);
         String user = "mkruczek";
         //when
-        String greeting = sut.getGreeting(user, langDto.getId().toString());
+        String greeting = sut.getGreeting(user, langDto.getId());
 
         //then
         assertEquals("Hello " + user + "!", greeting);
@@ -54,11 +54,11 @@ public class HelloServiceTest {
     }
 
     @Test
-    public void test_idEmpty_nameEmpty_getGreeting_returnDefault() {
+    public void test_idNull_nameEmpty_getGreeting_returnDefault() {
         //given
         HelloService sut = new HelloService();
         //when
-        String greeting = sut.getGreeting("", "");
+        String greeting = sut.getGreeting("", null);
 
         //then
         assertEquals("Hello world!", greeting);
@@ -73,19 +73,6 @@ public class HelloServiceTest {
 
         //then
         assertEquals("Hello world!", greeting);
-    }
-
-    @Test
-    public void test_idString_userMkruczek_getGreeting_returnDefaultLangDto() {
-        //given
-        HelloService sut = new HelloService();
-        String user = "mkruczek";
-
-        //when
-        String greeting = sut.getGreeting(user, "abc");
-
-        //then
-        assertEquals("Hello " + user + "!", greeting);
     }
 
     private LangService createMockLangDtoRepository(LangDto langDto) {

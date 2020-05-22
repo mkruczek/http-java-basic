@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-
 @Getter
 @Builder
 @ToString
